@@ -7,13 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Operator;
+namespace Calc\Notation\Interfaces;
 
 /**
- * Interface ArithmeticOperatorInterface
+ * Interface MathNotationInterface
  * @package Calc
  */
-interface ArithmeticOperatorInterface
+interface MathNotationProcessorInterface
 {
-
+    /**
+     * @param string $input
+     * @return mixed
+     */
+    public function evaluate(string $input);
 }

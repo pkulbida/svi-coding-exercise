@@ -9,6 +9,8 @@
  */
 namespace Calc\Notation;
 
+use Calc\Notation\Interfaces\MathNotationProcessorInterface;
+
 /**
  * Class ReversePolishNotation
  * @package Calc
@@ -16,22 +18,34 @@ namespace Calc\Notation;
 class ReversePolishNotationProcessor implements MathNotationProcessorInterface
 {
     /**
+     * @var array
+     */
+    private $stack = [];
+
+    /**
      * @param string $input
      * @return mixed
      */
-    public function process(string $input)
+    public function evaluate(string $input)
     {
-        $pre  = '(?:^|\s+)';
-        $post = '(?:\s+|$)';
+        $inputAsArray = explode(' ', trim($input));
 
-        $num = '([+-]?(?:\.\d+|\d+(?:\.\d*)?))';
+        for($i = 0; $i < count($inputAsArray); $i++)
+        {
+            if (is_numeric($inputAsArray[$i])) {
+                array_push($this->stack, $inputAsArray[$i]);
+            } else {
 
-        $op = '([-+*\/])';
+                $secondOperand = end($this->stack);
+                array_pop($this->stack);
+                $firstOperand = end($this->stack);
+                array_pop($this->stack);
 
-        do {
-            $input = preg_replace("/$pre$num\\s+$num\\s+$op$post/e", "' '.($1 $3 $2).' '", $input, -1, $n);
-        } while ($n);
+                $operatorClass = ALLOWED_OPERATORS_MAP[$inputAsArray[$i]];
+                array_push($this->stack, $operatorClass::apply($firstOperand,$secondOperand));
+            }
+        }
 
-        return preg_match("/^\\s*$num\\s*$/",$input) ? floatval($input) : 'error';
+        return end($this->stack);
     }
 }

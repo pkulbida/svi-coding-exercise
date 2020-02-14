@@ -9,6 +9,8 @@
  */
 namespace Calc\Input;
 
+use Calc\Input\Interfaces\InputAbstract;
+
 /**
  * Class CliInput
  * @package Calc
@@ -20,7 +22,7 @@ class CliInput extends InputAbstract
      */
     protected function readInput(): string
     {
-        echo CLI_PROMPT;
+        fwrite(STDOUT,  "\033[0m" . CLI_PROMPT);
 
         return fgets(STDIN);
     }
@@ -29,10 +31,10 @@ class CliInput extends InputAbstract
      * @param string $input
      * @return mixed
      */
-    protected function evaluateInput(string $input): string
+    protected function evaluateInput(string $input)
     {
         return $this->checkExitCommand($input)
-            ->calculator->process(trim($input));
+            ->calculator->process($input);
     }
 
     /**

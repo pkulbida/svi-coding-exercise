@@ -7,17 +7,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Notation;
+namespace Calc\Operator\Interfaces;
 
 /**
- * Interface MathNotationInterface
+ * Interface ArithmeticOperatorInterface
  * @package Calc
  */
-interface MathNotationProcessorInterface
+interface ArithmeticOperatorInterface
 {
     /**
-     * @param string $input
-     * @return mixed
+     * @param int|float $paramL
+     * @param int|float $paramR
+     * @return mixed|void
      */
-    public function process(string $input);
+    public static function apply($paramL, $paramR);
 }

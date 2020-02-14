@@ -9,7 +9,7 @@
 */
 namespace Calc;
 
-use Calc\Notation\MathNotationProcessorInterface;
+use Calc\Notation\Interfaces\MathNotationProcessorInterface;
 
 /**
  * Class Calculator
@@ -39,9 +39,10 @@ class Calculator
     public function process($input)
     {
         try {
-            $result = $this->notationProcessor->process($input);
-        } catch (\Exception $e) {
-            $result = $e->getMessage() . self::ERR_MESSAGE;
+            $result = $this->notationProcessor->evaluate($input);
+        } catch (\Error $e) {
+            fwrite(STDOUT,  "\033[31m" . $e->getMessage() .  PHP_EOL);
+            fwrite(STDOUT,  "\033[32m" . self::ERR_MESSAGE . PHP_EOL);
         }
 
         return $result;

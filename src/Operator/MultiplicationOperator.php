@@ -9,11 +9,21 @@
  */
 namespace Calc\Operator;
 
+use Calc\Operator\Interfaces\ArithmeticOperatorInterface;
+
 /**
  * Class MultiplicationOperator
  * @package Calc
  */
 class MultiplicationOperator implements ArithmeticOperatorInterface
 {
-
+    /**
+     * @param int|float $paramL
+     * @param int|float $paramR
+     * @return mixed|void
+     */
+    public static function apply($paramL, $paramR)
+    {
+        return $paramL * $paramR;
+    }
 }
