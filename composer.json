@@ -1,0 +1,17 @@
+{
+    "name": "svi/coding-exercise",
+    "description": "Provides functionality to handle calculations by Reverse Polish notation (RPN)",
+    "keywords": ["svitla", "coding-excercise", "rpn-calc"],
+    "license": "The Unlicense",
+    "authors": [{
+        "name": "Petro Kulbida",
+        "email": "petro.kulbida@gmail.com"
+    }],
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {"Calc\\": ["src/", "lib/"]},
+        "files": ["config.php"]
+    }
+}
