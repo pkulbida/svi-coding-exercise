@@ -15,5 +15,8 @@ namespace Calc\Exception;
  */
 class ZeroDivisionException extends \LogicException
 {
-
+    /**
+     * @inherited
+     */
+    protected $message = 'Cannot divide %d by 0.';
 }

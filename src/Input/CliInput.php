@@ -13,24 +13,47 @@ namespace Calc\Input;
  * Class CliInput
  * @package Calc
  */
-class CliInput implements InputInterface
+class CliInput extends InputAbstract
 {
     /**
-     * CliInput constructor.
+     * @return string
      */
-    public function __construct()
+    protected function readInput(): string
     {
+        echo CLI_PROMPT;
 
+        return fgets(STDIN);
     }
 
     /**
-     * @return string|void
+     * @param string $input
+     * @return mixed
      */
-    public function handleRequest()
+    protected function evaluateInput(string $input): string
     {
-        // CLI call
-        if (isset($_SERVER['argv'], $_SERVER['argc'])) {
+        return $this->checkExitCommand($input)
+            ->calculator->process(trim($input));
+    }
 
-        }
+    /**
+     * @param string|integer|float $result
+     * @return mixed
+     */
+    protected function writeOutput($result)
+    {
+        return print $result . PHP_EOL;
+    }
+
+    /**
+     * Exit REPL on Ctrl+D/`q`
+     * @param $input
+     * @return self
+     */
+    protected function checkExitCommand($input): InputAbstract
+    {
+        is_string($input) ?: die;
+        trim($input) != CLI_EXIT_COMMAND ?: die;
+
+        return $this;
     }
 }

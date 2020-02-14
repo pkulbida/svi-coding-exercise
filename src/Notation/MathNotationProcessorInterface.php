@@ -10,10 +10,14 @@
 namespace Calc\Notation;
 
 /**
- * Class ReversePolishNotation
+ * Interface MathNotationInterface
  * @package Calc
  */
-class ReversePolishNotation implements MathNotationInterface
+interface MathNotationProcessorInterface
 {
-
+    /**
+     * @param string $input
+     * @return mixed
+     */
+    public function process(string $input);
 }

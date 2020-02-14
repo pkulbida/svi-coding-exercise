@@ -7,16 +7,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Notation;
+namespace Calc\Input;
 
 /**
- * Interface MathNotationInterface
+ * Class InputValidator
  * @package Calc
  */
-interface MathNotationInterface
+class InputValidator
 {
     /**
-     * @return mixed
+     * @return
      */
-    public function evaluate();
+    public function validate()
+    {
+
+    }
 }
