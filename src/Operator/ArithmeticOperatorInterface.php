@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Operator\Interfaces;
+namespace Calc\Operator;
 
 /**
  * Interface ArithmeticOperatorInterface
@@ -16,9 +16,10 @@ namespace Calc\Operator\Interfaces;
 interface ArithmeticOperatorInterface
 {
     /**
-     * @param int|float $paramL
-     * @param int|float $paramR
-     * @return mixed|void
+     * @param int|float $firstOperand
+     * @param int|float $secondOperand
+     * @return mixed
      */
-    public static function apply($paramL, $paramR);
+    public static function apply($firstOperand, $secondOperand);
+
 }

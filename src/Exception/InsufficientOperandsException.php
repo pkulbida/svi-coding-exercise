@@ -7,19 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Input;
+namespace Calc\Exception;
 
 /**
- * Class InputValidator
+ * Class ZeroDivisionException
  * @package Calc
  */
-class InputValidator
+class InsufficientOperandsException extends \LogicException
 {
-    /**
-     * @return
-     */
-    public function validate()
-    {
-
-    }
+    //
 }

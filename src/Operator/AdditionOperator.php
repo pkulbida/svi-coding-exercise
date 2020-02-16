@@ -9,8 +9,6 @@
  */
 namespace Calc\Operator;
 
-use Calc\Operator\Interfaces\ArithmeticOperatorInterface;
-
 /**
  * Class AdditionOperator
  * @package Calc
@@ -18,12 +16,12 @@ use Calc\Operator\Interfaces\ArithmeticOperatorInterface;
 class AdditionOperator implements ArithmeticOperatorInterface
 {
     /**
-     * @param int|float $paramL
-     * @param int|float $paramR
-     * @return mixed|void
+     * @param int|float $firstOperand
+     * @param int|float $secondOperand
+     * @return mixed
      */
-    public static function apply($paramL, $paramR)
+    public static function apply($firstOperand, $secondOperand)
     {
-        return $paramL + $paramR;
+        return $firstOperand + $secondOperand;
     }
 }

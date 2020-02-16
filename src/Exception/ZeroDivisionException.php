@@ -18,5 +18,5 @@ class ZeroDivisionException extends \LogicException
     /**
      * @inherited
      */
-    protected $message = 'Cannot divide %d by 0.';
+    protected $message = 'Can`t divide by 0.';
 }

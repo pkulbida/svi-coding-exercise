@@ -7,14 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Notation\Interfaces;
+namespace Calc\Notation;
 
 /**
- * Interface MathNotationInterface
+ * Interface MathNotationHandlerInterface
  * @package Calc
  */
-interface MathNotationProcessorInterface
+interface MathNotationHandlerInterface
 {
+    const BAD_TOKEN_ERROR_MESSAGE = 'Unsupported operand/operator! Use numbers and base arithmetic operators. ';
+    const INSUFFICIENT_OPERANDS_MESSAGE = 'Could not perform `%s`. At least two values(operands) are required.';
+
     /**
      * @param string $input
      * @return mixed

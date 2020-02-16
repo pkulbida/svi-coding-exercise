@@ -9,20 +9,20 @@
  */
 namespace Calc\Input;
 
-use Calc\Input\Interfaces\InputAbstract;
-
 /**
  * Class CliInput
  * @package Calc
  */
 class CliInput extends InputAbstract
 {
+    const MESSAGE = 'Please provide proper data to calculate!';
+
     /**
      * @return string
      */
-    protected function readInput(): string
+    protected function readInput()
     {
-        fwrite(STDOUT,  "\033[0m" . CLI_PROMPT);
+        fwrite(STDOUT, "\033[0m" . CLI_PROMPT);
 
         return fgets(STDIN);
     }
@@ -31,10 +31,18 @@ class CliInput extends InputAbstract
      * @param string $input
      * @return mixed
      */
-    protected function evaluateInput(string $input)
+    protected function evaluateInput($input)
     {
-        return $this->checkExitCommand($input)
-            ->calculator->process($input);
+        try {
+            $result = $this->checkExitCommand($input)
+                ->calculator->process($input);
+        } catch (\Error $error) {
+            fwrite(STDOUT, "\033[31m" . $error->getMessage() .  PHP_EOL . "\033[0m");
+        } catch (\Exception $e) {
+            fwrite(STDOUT, "\033[31m" . $e->getMessage() .  PHP_EOL . "\033[0m");
+        }
+
+        return $result ?? self::MESSAGE;
     }
 
     /**
@@ -53,9 +61,14 @@ class CliInput extends InputAbstract
      */
     protected function checkExitCommand($input): InputAbstract
     {
-        is_string($input) ?: die;
-        trim($input) != CLI_EXIT_COMMAND ?: die;
+        is_string($input) ?: $this->terminate();
+        trim($input) != CLI_EXIT_COMMAND ?: $this->terminate();
 
         return $this;
+    }
+
+    protected function terminate()
+    {
+        exit;
     }
 }

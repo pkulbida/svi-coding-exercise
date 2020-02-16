@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Calc\Input\Interfaces;
+namespace Calc\Input;
 
 use Calc\Calculator;
 
@@ -47,13 +47,13 @@ abstract class InputAbstract
     /**
      * @return string
      */
-    abstract protected function readInput(): string;
+    abstract protected function readInput();
 
     /**
      * @param string $input
      * @return mixed
      */
-    abstract protected function evaluateInput(string $input);
+    abstract protected function evaluateInput($input);
 
     /**
      * @param string|integer|float $result

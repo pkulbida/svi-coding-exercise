@@ -9,7 +9,7 @@
 */
 namespace Calc;
 
-use Calc\Notation\Interfaces\MathNotationProcessorInterface;
+use Calc\Notation\MathNotationHandlerInterface;
 
 /**
  * Class Calculator
@@ -17,19 +17,18 @@ use Calc\Notation\Interfaces\MathNotationProcessorInterface;
  */
 class Calculator
 {
-    const ERR_MESSAGE = 'Please provide proper data to calculate!';
     /**
-     * @var MathNotationProcessorInterface
+     * @var MathNotationHandlerInterface
      */
-    protected $notationProcessor;
+    protected $notationHandler;
 
     /**
      * Calculator constructor.
-     * @param MathNotationProcessorInterface $notationProcessor
+     * @param MathNotationHandlerInterface $notationHandler
      */
-    public function __construct(MathNotationProcessorInterface $notationProcessor)
+    public function __construct(MathNotationHandlerInterface $notationHandler)
     {
-        $this->notationProcessor = $notationProcessor;
+        $this->notationHandler = $notationHandler;
     }
 
     /**
@@ -38,13 +37,6 @@ class Calculator
      */
     public function process($input)
     {
-        try {
-            $result = $this->notationProcessor->evaluate($input);
-        } catch (\Error $e) {
-            fwrite(STDOUT,  "\033[31m" . $e->getMessage() .  PHP_EOL);
-            fwrite(STDOUT,  "\033[32m" . self::ERR_MESSAGE . PHP_EOL);
-        }
-
-        return $result;
+        return $this->notationHandler->evaluate($input);
     }
 }
